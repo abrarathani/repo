@@ -28,7 +28,6 @@
   <build>
     <plugins>
 
-      <!-- Java 17 compiler -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -39,7 +38,6 @@
         </configuration>
       </plugin>
 
-      <!-- WAR plugin required for Java 17 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
@@ -49,11 +47,10 @@
     </plugins>
   </build>
 
-  <!-- THIS is the key part that fixes your current error -->
   <dependencyManagement>
     <dependencies>
 
-      <!-- keep OLD coordinates used by server module -->
+      <!-- junit used by server -->
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit-dep</artifactId>
@@ -61,6 +58,7 @@
         <scope>test</scope>
       </dependency>
 
+      <!-- hamcrest used by server -->
       <dependency>
         <groupId>org.hamcrest</groupId>
         <artifactId>hamcrest-core</artifactId>
@@ -75,7 +73,15 @@
         <scope>test</scope>
       </dependency>
 
-      <!-- keep OLD servlet coordinates used by webapp -->
+      <!-- mockito used by server -->
+      <dependency>
+        <groupId>org.mockito</groupId>
+        <artifactId>mockito-core</artifactId>
+        <version>5.11.0</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- servlet used by webapp -->
       <dependency>
         <groupId>javax.servlet</groupId>
         <artifactId>servlet-api</artifactId>
