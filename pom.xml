@@ -10,6 +10,7 @@
     <groupId>com.example.maven-project</groupId>
     <artifactId>maven-project</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>server</artifactId>
@@ -18,7 +19,6 @@
 
   <dependencies>
 
-    <!-- FIX: junit-dep does NOT exist, use junit -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
