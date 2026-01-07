@@ -12,8 +12,6 @@
   <packaging>pom</packaging>
 
   <name>Maven Project</name>
-  <description>Sample Maven project with a working, deployable site.</description>
-  <url>http://www.example.com</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,14 +24,6 @@
     <module>server</module>
     <module>webapp</module>
   </modules>
-
-  <distributionManagement>
-    <site>
-      <id>site-server</id>
-      <name>Test Project Site</name>
-      <url>file:///tmp/maven-project-site</url>
-    </site>
-  </distributionManagement>
 
   <build>
     <plugins>
@@ -49,95 +39,58 @@
         </configuration>
       </plugin>
 
-      <!-- WAR plugin fix for Java 17 -->
+      <!-- WAR plugin required for Java 17 -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.4.0</version>
       </plugin>
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-release-plugin</artifactId>
-        <version>3.0.1</version>
-        <configuration>
-          <autoVersionSubmodules>true</autoVersionSubmodules>
-        </configuration>
-      </plugin>
-
     </plugins>
-
-    <pluginManagement>
-      <plugins>
-
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.11.0</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.2.5</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-resources-plugin</artifactId>
-          <version>3.3.1</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-site-plugin</artifactId>
-          <version>3.12.1</version>
-        </plugin>
-
-        <plugin>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>3.6.3</version>
-        </plugin>
-
-      </plugins>
-    </pluginManagement>
   </build>
 
+  <!-- THIS is the key part that fixes your current error -->
   <dependencyManagement>
     <dependencies>
 
-      <dependency>
-        <groupId>javax.servlet</groupId>
-        <artifactId>javax.servlet-api</artifactId>
-        <version>4.0.1</version>
-        <scope>provided</scope>
-      </dependency>
-
+      <!-- keep OLD coordinates used by server module -->
       <dependency>
         <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
+        <artifactId>junit-dep</artifactId>
         <version>4.13.2</version>
         <scope>test</scope>
       </dependency>
 
       <dependency>
         <groupId>org.hamcrest</groupId>
-        <artifactId>hamcrest</artifactId>
+        <artifactId>hamcrest-core</artifactId>
         <version>2.2</version>
         <scope>test</scope>
       </dependency>
 
       <dependency>
-        <groupId>org.mockito</groupId>
-        <artifactId>mockito-core</artifactId>
-        <version>5.11.0</version>
+        <groupId>org.hamcrest</groupId>
+        <artifactId>hamcrest-library</artifactId>
+        <version>2.2</version>
         <scope>test</scope>
+      </dependency>
+
+      <!-- keep OLD servlet coordinates used by webapp -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>4.0.1</version>
+        <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>javax.servlet.jsp</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>2.3.3</version>
+        <scope>provided</scope>
       </dependency>
 
     </dependencies>
   </dependencyManagement>
-
-  <scm>
-    <connection>scm:git:https://github.com/jleetutorial/maven-project.git</connection>
-    <developerConnection>scm:git:https://github.com/jleetutorial/maven-project.git</developerConnection>
-    <tag>HEAD</tag>
-    <url>https://github.com/jleetutorial/maven-project</url>
-  </scm>
 
 </project>
